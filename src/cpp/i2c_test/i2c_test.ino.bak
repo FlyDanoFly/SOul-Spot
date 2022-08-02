@@ -1,0 +1,62 @@
+#include <Wire.h>
+
+#define I2C_SLAVE_ADDRESS 11 // 12 pour l'esclave 2 et ainsi de suite
+#define PAYLOAD_SIZE 2
+
+void setup() {
+  Serial.begin(115200);
+  Serial.println("Hello world!");
+  Wire.begin(I2C_SLAVE_ADDRESS);
+  Serial.println("-------------------------------------I am Slave1");
+  delay(1000);
+  Wire.onRequest(requestEvents);
+  Wire.onReceive(receiveEvents);
+}
+
+void loop() {
+}
+
+int n = 0;
+
+void requestEvents() {
+  Serial.println(F("---> recieved request"));
+  Serial.print(F("sending value : "));
+  Serial.println(n);
+  Wire.write(n);
+  Serial.print(F("sending values : 1 - 15"));
+  Serial.println(n);
+  Wire.write(1);
+  Wire.write(2);
+  Wire.write(3);
+  Wire.write(4);
+  Wire.write(5);
+  Wire.write(6);
+  Wire.write(7);
+  Wire.write(8);
+  Wire.write(9);
+  Wire.write(10);
+  Wire.write(11);
+  Wire.write(12);
+  Wire.write(13);
+  Wire.write(14);
+  Wire.write(15);
+
+}
+
+void receiveEvents(int numBytes) {
+  Serial.println(F("---> recieved events"));
+  n = Wire.read();
+  Serial.print(numBytes);
+  Serial.println(F(" bytes recieved"));
+  Serial.print(F("recieved value: "));
+  Serial.println(n);
+  while (Wire.available()) {
+    Serial.print(F("available pre: "));
+    Serial.println(Wire.available());
+    n = Wire.read();
+    Serial.print(F("recieved value: "));
+    Serial.println(n);
+    Serial.print(F("available post: "));
+    Serial.println(Wire.available());
+  }
+}
