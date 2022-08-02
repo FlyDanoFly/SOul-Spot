@@ -1,0 +1,59 @@
+{% import 'forms.jinja' as forms %}
+<!DOCTYPE html>
+   <head>
+      <title>{{ title }}</title>
+      <link rel="stylesheet" href="static/penguin.css" />
+
+      <meta name="viewport" content="width=device-width, initial-scale=1" /> 
+
+      <style>
+        {# * { outline: 1px red solid !important; visibility: visible !important } #}
+        {# body { width: 100% } #}
+      </style>
+    </head>
+    <body>
+        <h1>Hello, World!</h1>
+        <h2>The date and time on the server is: {{ time }}</h2>
+    
+        <hr />
+
+        <select name="program-mode">
+            {% for key, value in PROGRAMS.items() %}
+                <option values="key">{{ value.display_name }}</option>
+            {% endfor %}
+        </select>
+
+
+        {% for key, value in PROGRAMS.items() %}
+            <h3>{{ value['display_name'] }}</h3>
+            {# <div id="program-mode--{{key}}"> #}
+                {% for var in value['vars'] %}
+                    {{ forms.range_widget(key, var.name, var.min, var.max) }}
+                {% else %}
+                    <p>-- No vars for this program mode --</p>
+                {% endfor %}
+            {# </div> #}
+        {% endfor %}
+
+    <div class="pengslider">
+        <input id="slider1" name="slider1" type="range" value=0 min=0 max=22 step=1>
+        <label for="slider1">0</label>
+    </div>
+
+    <div class="pengslider">
+        <input id="slider1" name="slider1" type="range" value=0 min=0 max=22 step=1>
+        <label for="slider1">0</label>
+    </div>
+
+        <input id="slider2" name="slider2" type="range" value=0>
+        <label for="slider2">0</label>
+
+
+
+      <script src="static/pageLogic.js"></script>
+      <script src="static/penguin.js"></script>
+
+
+
+   </body>
+</html>

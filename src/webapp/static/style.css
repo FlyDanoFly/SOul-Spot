@@ -1,0 +1,28 @@
+body {
+    background-color: lightblue;
+    overflow-x:
+}
+
+input[type=number] {
+    width: 50px;
+    display: inline-block;
+    margin-right: 20px;
+}
+
+input[type=range] {
+    transform: scaleY(5.0); /* Or however big you want it */
+    transform-origin: 0 0;
+    margin: 50px;
+    width: 30%;
+    /*display: inline-block; */
+}
+
+.slider-div {
+    display: flex;
+    padding-bottom: 20px;
+}
+
+.slider-div p {
+    font-weight: bold;
+    width: 120px;
+}

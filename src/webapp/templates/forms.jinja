@@ -1,0 +1,33 @@
+{% macro range_widget2(mode, name, min, max, initial_value=42) -%}
+    <div class="slider-div">
+    {% set mode_name = mode|replace('-', '_') + '__' + name|replace('-', '_') %}
+    <h3>moo {{ itit }}</h3>
+        <p>{{ name }}</p>
+        <input id="id-textbox--{{ mode_name }}" class="slider slider-textbox" name="textbox--{{ mode_name }}" type="number" min="{{ min }}" max="{{ max }}" step="1" value="{{ initial_value }}" />
+        <input id="id-range--{{ mode_name }}" class="slider slider-range" name="range--{{ mode_name }}" type="range" min="{{ min }}" max="{{ max }}" step="1" value="{{ initial_value }}" step="1" />
+    <script>
+        let intervalId{{ mode|replace('-', '_') }}{{ name|replace('-', '_') }};
+        let ranger{{ mode|replace('-', '_') }}{{ name|replace('-', '_') }} = document.getElementById('id-range--{{ mode }}--{{ name }}');
+        let textbox{{ mode|replace('-', '_') }}{{ name|replace('-', '_') }} = document.getElementById('id-textbox--{{ mode }}--{{ name }}');
+        
+        ranger{{ mode|replace('-', '_') }}{{ name|replace('-', '_') }}.addEventListener("mousedown", function() {
+            intervalId{{ mode|replace('-', '_') }}{{ name|replace('-', '_') }} = setInterval(() => {
+                textbox{{ mode|replace('-', '_') }}{{ name|replace('-', '_') }}.value = ranger{{ mode|replace('-', '_') }}{{ name|replace('-', '_') }}.value;
+                //updateIt();
+            }, 100)
+        });
+        
+        ranger{{ mode|replace('-', '_') }}{{ name|replace('-', '_') }}.addEventListener("mouseup", function() {
+            clearInterval(intervalId{{ mode|replace('-', '_') }}{{ name|replace('-', '_') }});
+        });        
+    </script>
+    </div>
+{%- endmacro %}
+
+{%- macro range_widget(mode, name, min=0, max=100, initial_value=42) -%}
+    {% set full_name = mode + '__' + name %}
+    <div class="pengslider">
+        <input id="id-slider-{{ full_name }}" class="program-mode-{{ mode }}" name="input-{{ full_name }}" type="range" value="{{ initial_value|d(0) }}" min="{{ min|d(0) }}" max="{{ max|d(100) }}" step="1">
+        <label for="id-slider-{{ full_name }}">0</label>
+    </div>
+{%- endmacro -%}
