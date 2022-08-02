@@ -1,0 +1,11 @@
+#include <stdio.h>
+#include <math.h>
+
+#define NUM 5.0
+
+void main() {
+	printf("Hello world\n");
+	for (float i = -10.0; i <= 10.0; i+=0.2) {
+		printf("fmod(%f, %f) = %f\n", i, NUM, fmod(i, NUM));
+	}
+}
